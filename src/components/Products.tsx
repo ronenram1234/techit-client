@@ -1,11 +1,11 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { getAllProducts, getProductById } from "../services/productServices";
+import { getAllProducts, getProductById } from "../services/productsService";
 import { Product } from "../interfaces/Product";
 import { User } from "../interfaces/User";
 import ModalUpdtaeAdd from "./ModalUpdtaeAdd";
 import ButtonAddProduct from "./ButtonAddProduct";
 
-import { addProductIdToCart } from "../services/cartService";
+import { addProductIdToCart } from "../services/cartsService";
 import ProductCard from "./ProductCard";
 
 // const SharedStateContext = createContext();
@@ -27,7 +27,7 @@ const Products: FunctionComponent<ProductsProps> = ({
   const [allProducts, setAllProducts] = useState<Product[]>([]);
 
   const [selectedProduct, setSelectedProduct] = useState<Product>({
-    id: "",
+    _id: "",
     name: "",
     price: 0,
     category: "",
@@ -56,9 +56,9 @@ const Products: FunctionComponent<ProductsProps> = ({
     // const myCart:Product[] = [];
     const tempCart: Product[] = [];
 
-    product.id &&
-      userApp.id &&
-      addProductIdToCart(product.id, userApp.id)
+    product._id &&
+      userApp._id &&
+      addProductIdToCart(product._id)
         .then((res) => {
           let promises = [];
           for (let key of res.data.products) {
@@ -68,8 +68,8 @@ const Products: FunctionComponent<ProductsProps> = ({
             .then((res) => {
               console.log(res);
 
-              res.map((item)=> tempCart.push(item.data[0]))
-              console.log(tempCart)
+              res.map((item) => tempCart.push(item.data[0]));
+              console.log(tempCart);
               setCart(tempCart);
             })
             .catch((err) => console.log(err));
@@ -92,7 +92,7 @@ const Products: FunctionComponent<ProductsProps> = ({
 
   function addProduct() {
     let selected: Product = {
-      id: "",
+      _id: "",
       name: "",
       price: 0,
       category: "",

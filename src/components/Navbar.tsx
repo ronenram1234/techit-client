@@ -65,7 +65,7 @@ const Navbar: FunctionComponent<NavbarProps> = ({setNotIsLogin, userApp, cart}) 
                 type="submit"
                 onClick={() => {
                   navigate("/");
-                  localStorage.removeItem("userId");
+                  localStorage.removeItem("token");
                   setNotIsLogin(true)
                 }}
               >

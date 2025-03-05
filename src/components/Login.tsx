@@ -33,8 +33,8 @@ const Login: FunctionComponent<LoginProps> = ({
 
             navigate("/products");
 
-            localStorage.removeItem("userId");
-            localStorage.setItem("userId", JSON.stringify(res.data[0]));
+            localStorage.removeItem("token");
+            localStorage.setItem("token", JSON.stringify(res.data[0]));
             setNotIsLogin(false);
             setUserApp(res.data[0]);
             // setUserName(values);

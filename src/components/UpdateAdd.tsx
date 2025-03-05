@@ -3,9 +3,11 @@ import { FunctionComponent } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { Product } from "../interfaces/Product";
-import { addNewProduct, changeProductDetails } from "../services/productServices";
+import {
+  addNewProduct,
+  changeProductDetails,
+} from "../services/productsService";
 import { errorMsg, successMsg } from "../services/feedbackService";
-
 
 interface UpdateAddProps {
   selectedProduct: Product;
@@ -14,7 +16,6 @@ interface UpdateAddProps {
   setIsProductChange: React.Dispatch<React.SetStateAction<boolean>>;
   handleModalUpdate: any;
 }
-
 
 const UpdateAdd: FunctionComponent<UpdateAddProps> = ({
   selectedProduct,
@@ -30,7 +31,7 @@ const UpdateAdd: FunctionComponent<UpdateAddProps> = ({
 
   const formik = useFormik<Product>({
     initialValues: {
-      // id: selectedProduct?.id || "",
+      _id: selectedProduct?._id || "",
       name: selectedProduct?.name || "",
       price: selectedProduct?.price || 0,
       category: selectedProduct?.category || "",
@@ -46,53 +47,36 @@ const UpdateAdd: FunctionComponent<UpdateAddProps> = ({
     }),
     onSubmit: async (values) => {
       if (modalAction === "add") {
-
         addNewProduct(values)
-        .then((res) => {
-         
+          .then((res) => {
             // console.log(res.data);
-         
+
             setIsProductChange(!isProductChange);
-         
+
             successMsg("AddnewProduct");
             // navigate("/products");
-            handleModalUpdate()
-         
-        })
-        .catch((err) => {
-          console.log(err);
-          errorMsg(err);
-        });
-
-
-
-
-      } else {
-
-
-          if (!selectedProduct?.id) {
-            throw new Error("Product ID is missing");
-          }
-
-          changeProductDetails(
-            selectedProduct.id,
-            values
-          )
-          .then((res)=>{
-
-            setIsProductChange(!isProductChange);
-            successMsg("Product updated successfully");
-            handleModalUpdate()
-
+            handleModalUpdate();
           })
-          .catch((err)=>{
+          .catch((err) => {
             console.log(err);
             errorMsg(err);
+          });
+      } else {
+        if (!selectedProduct?._id) {
+          throw new Error("Product ID is missing");
+        }
+
+        // changeProductDetails(selectedProduct.id, values)
+        changeProductDetails(values)
+          .then((res) => {
+            setIsProductChange(!isProductChange);
+            successMsg("Product updated successfully");
+            handleModalUpdate();
           })
-
-
-
-        
+          .catch((err) => {
+            console.log(err);
+            errorMsg(err);
+          });
       }
     },
   });

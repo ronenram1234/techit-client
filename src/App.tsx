@@ -27,7 +27,7 @@ function App() {
   const [isNotLogin, setNotIsLogin] = useState(true);
 
   const [userApp, setUserApp] = useState<User>({ email: "", password: "" });
-  const userString: string | null = localStorage.getItem("userId");
+  const userString: string | null = localStorage.getItem("token");
   const [cart, setCart] = useState<Product[]>([]);
 
   // check if user login exisist

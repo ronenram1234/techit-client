@@ -9,7 +9,7 @@ interface ProfileProps {
 
 const Profile: FunctionComponent<ProfileProps> = ({ setNotIsLogin }) => {
   const navigate: NavigateFunction = useNavigate();
-  const userString: string | null = localStorage.getItem("userId");
+  const userString: string | null = localStorage.getItem("token");
   let user: User | null = null;
  
   
@@ -20,7 +20,7 @@ const Profile: FunctionComponent<ProfileProps> = ({ setNotIsLogin }) => {
     // console.log(user[0].name);
   } else {
     errorMsg("Critical error - please login again");
-    localStorage.removeItem("userId");
+    localStorage.removeItem("token");
     setNotIsLogin(true);
     navigate("/");
     

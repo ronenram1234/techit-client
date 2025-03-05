@@ -36,7 +36,7 @@ const Register: FunctionComponent<RegisterProps> = ({ setNotIsLogin }) => {
           .then(() => {
             successMsg("New user added");
             setNotIsLogin(true);
-            localStorage.removeItem("userId");
+            localStorage.removeItem("token");
             navigate("/");
           })
           .catch((err) => {

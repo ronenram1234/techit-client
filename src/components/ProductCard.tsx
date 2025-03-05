@@ -3,7 +3,7 @@ import { FunctionComponent } from "react";
 import ButtonIsAdmin from "./ButtonIsAdmin";
 import { Product } from "../interfaces/Product";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import { deleteProduct } from "../services/productServices";
+import { deleteProduct } from "../services/productsService";
 import { errorMsg, successMsg } from "../services/feedbackService";
 
 interface ProductCardProps {
@@ -30,7 +30,6 @@ const ProdectCard: FunctionComponent<ProductCardProps> = ({
   setSelectedProduct,
   setModalAction,
   setModalShow,
-  
 }) => {
   const handleDelete = async (id: string = "") => {
     try {
@@ -51,7 +50,7 @@ const ProdectCard: FunctionComponent<ProductCardProps> = ({
   };
 
   function handleUpdate(id: string = "") {
-    const selected = allProducts.find((prod) => prod.id === id);
+    const selected = allProducts.find((prod) => prod._id === id);
     if (selected) {
       setSelectedProduct(selected);
       setModalAction("update");
@@ -98,10 +97,10 @@ const ProdectCard: FunctionComponent<ProductCardProps> = ({
                 <FontAwesomeIcon icon={faCartShopping} />
                 Add to Cart
               </button>
-              {isAdmin && product.id && (
+              {isAdmin && product._id && (
                 <>
                   <ButtonIsAdmin
-                    id={product.id}
+                    id={product._id}
                     handleUpdate={handleUpdate}
                     handleDelete={handleDelete}
                   />

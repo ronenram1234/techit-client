@@ -1,7 +1,7 @@
 
 
     export interface Cart {
-        id?: string;
+        _id?: string;
         userId: string;
         products: string[];
         active: boolean;

@@ -25,7 +25,7 @@ const Cart: FunctionComponent<CartProps> = ({ cart }) => {
           {cart.map((item) => (
             <>
             {/* {console.log(item)} */}
-            <tr key={item.id}>
+            <tr key={item._id}>
               <td >{item.name}</td>
               <td>{item.category}</td>
               <td>{item.description}</td>
