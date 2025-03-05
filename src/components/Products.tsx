@@ -41,9 +41,16 @@ const Products: FunctionComponent<ProductsProps> = ({
   const [modalAction, setModalAction] = useState("add");
 
   useEffect(() => {
-    getAllProducts()
-      .then((res) => setAllProducts(res.data))
-      .catch((err) => console.log(err));
+    const fetchP = async () => {
+      try {
+        const res = await getAllProducts();
+        setAllProducts(res.data);
+        // console.log(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchP();
   }, [isProductChange]);
 
   // useEffect(() => {
@@ -60,19 +67,19 @@ const Products: FunctionComponent<ProductsProps> = ({
       userApp._id &&
       addProductIdToCart(product._id)
         .then((res) => {
-          let promises = [];
-          for (let key of res.data.products) {
-            promises.push(getProductById(key));
-          }
-          Promise.all(promises)
-            .then((res) => {
-              console.log(res);
+          // let promises = [];
+          // for (let key of res.data.products) {
+          //   promises.push(getProductById(key));
+          // }
+          // Promise.all(promises)
+          //   .then((res) => {
+          //     console.log(res);
 
-              res.map((item) => tempCart.push(item.data[0]));
-              console.log(tempCart);
-              setCart(tempCart);
-            })
-            .catch((err) => console.log(err));
+          // res.data.products.map((item: Product) => tempCart.push(item));
+          // console.log(tempCart);
+          // setCart(res.data.products);
+          // })
+          // .catch((err) => console.log(err));
         })
         //       tempCart.push(res.data[0]);
 

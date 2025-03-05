@@ -9,7 +9,8 @@ import { Form } from "react-bootstrap";
 import { errorMsg, successMsg } from "../services/feedbackService";
 
 interface RegisterProps {
-setNotIsLogin: React.Dispatch<React.SetStateAction<boolean>>;}
+  setNotIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 const Register: FunctionComponent<RegisterProps> = ({ setNotIsLogin }) => {
   const navigate: NavigateFunction = useNavigate();
@@ -30,22 +31,43 @@ const Register: FunctionComponent<RegisterProps> = ({ setNotIsLogin }) => {
     }),
 
     onSubmit: async (values) => {
-      const userExist = await checkUser(values);
-      if (userExist.data.length===0) {
-        addUser(values as User)
-          .then(() => {
-            successMsg("New user added");
-            setNotIsLogin(true);
-            localStorage.removeItem("token");
-            navigate("/");
-          })
-          .catch((err) => {
-            console.log(err);
-            errorMsg(err);
-          });
-      }
-      else
-      errorMsg("Email already exists");
+      // const userExist = await checkUser(values)
+      //   .then((res) =>
+      //     // console.log(res))
+      //     errorMsg("Email already exists")
+      //   )
+      //   .catch((err) => {
+          // console.log(err)
+
+          addUser(values as User)
+            .then((res) => {
+              successMsg("New user added");
+              // setNotIsLogin(false);
+              // localStorage.removeItem("token");
+              // localStorage.setItem("token", res.data);
+              navigate("/");
+            })
+            .catch((err) => {
+              console.log(err);
+              errorMsg(err.response.data);
+            });
+        // });
+
+      // if (userExist.data.length===0) {
+      //   addUser(values as User)
+      //     .then(() => {
+      //       successMsg("New user added");
+      //       setNotIsLogin(true);
+      //       localStorage.removeItem("token");
+      //       navigate("/");
+      //     })
+      //     .catch((err) => {
+      //       console.log(err);
+      //       errorMsg(err);
+      //     });
+      // }
+      // else
+      // errorMsg("Email already exists");
     },
   });
 
@@ -98,11 +120,9 @@ const Register: FunctionComponent<RegisterProps> = ({ setNotIsLogin }) => {
               type="switch"
               id="isAdmin"
               label="Admin"
-              
               checked={formik.values.isAdmin}
               onChange={formik.handleChange}
             />
-            
           </div>
           <button
             className="btn btn-success w-100 mb-3"
@@ -119,4 +139,3 @@ const Register: FunctionComponent<RegisterProps> = ({ setNotIsLogin }) => {
 };
 
 export default Register;
-

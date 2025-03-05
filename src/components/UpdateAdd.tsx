@@ -47,7 +47,9 @@ const UpdateAdd: FunctionComponent<UpdateAddProps> = ({
     }),
     onSubmit: async (values) => {
       if (modalAction === "add") {
-        addNewProduct(values)
+        const productCopy = { ...values };
+        delete productCopy._id;
+        addNewProduct(productCopy)
           .then((res) => {
             // console.log(res.data);
 

@@ -31,17 +31,17 @@ function App() {
   const [cart, setCart] = useState<Product[]>([]);
 
   // check if user login exisist
-  useEffect(() => {
-    if (userString !== null) {
-      setNotIsLogin(false);
-      const obj: User = JSON.parse(userString);
-      setUserApp(obj);
-    }
-  }, [userString]);
+  // useEffect(() => {
+  //   if (userString !== null) {
+  //     setNotIsLogin(false);
+  //     const obj: User = JSON.parse(userString);
+  //     setUserApp(obj);
+  //   }
+  // }, [userString]);
 
-  useEffect(() => {
-    console.log(cart);
-  }, [cart]);
+  // useEffect(() => {
+  //   console.log(cart);
+  // }, [cart]);
 
   return (
     <div>
@@ -85,9 +85,10 @@ function App() {
               />
               <Route
                 path="/profile"
-                element={<Profile setNotIsLogin={setNotIsLogin} />}
+                element={<Profile setNotIsLogin={setNotIsLogin} userApp={userApp} />}
               />
-              <Route path="/cart" element={<Cart cart={cart} />} />
+              <Route path="/cart" element={<Cart />} />
+
               <Route path="*" element={<PageNotFound />} />
             </Routes>
           </>

@@ -1,12 +1,27 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { Product } from "../interfaces/Product";
+import { getProductsFromCart } from "../services/cartsService";
 
-interface CartProps {
-  cart: Product[];
-}
+// interface CartProps {}
 
-const Cart: FunctionComponent<CartProps> = ({ cart }) => {
-  console.log(cart);
+const Cart: FunctionComponent = () => {
+  
+  const [cart, setCart] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+        const res = await getProductsFromCart();
+        setCart(res.data); // Update state
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchCart();
+    console.log(cart);
+  }, []);
+
   return (
     <>
       <h1>Cart</h1>
@@ -22,17 +37,18 @@ const Cart: FunctionComponent<CartProps> = ({ cart }) => {
           </tr>
         </thead>
         <tbody>
-          {cart.map((item) => (
+          {cart.map((item: Product) => (
             <>
-            {/* {console.log(item)} */}
-            <tr key={item._id}>
-              <td >{item.name}</td>
-              <td>{item.category}</td>
-              <td>{item.description}</td>
-              <td>{item.price}</td>
-              <td>{item.quantity}</td>
-            </tr>
-            </>   ))}
+              {/* {console.log(item)} */}
+              <tr key={item._id}>
+                <td>{item.name}</td>
+                <td>{item.category}</td>
+                <td>{item.description}</td>
+                <td>{item.price}</td>
+                <td>{item.quantity}</td>
+              </tr>
+            </>
+          ))}
         </tbody>
       </table>
     </>

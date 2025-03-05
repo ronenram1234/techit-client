@@ -18,8 +18,8 @@ const Login: FunctionComponent<LoginProps> = ({
   const navigate: NavigateFunction = useNavigate();
   const formik = useFormik<User>({
     initialValues: {
-      email: "",
-      password: "",
+      email: "jj@gg.com",
+      password: "test123",
     },
     validationSchema: yup.object({
       email: yup.string().email().required(),
@@ -28,26 +28,25 @@ const Login: FunctionComponent<LoginProps> = ({
     onSubmit: async (values) => {
       checkUser(values)
         .then((res) => {
-          if (res.data.length > 0) {
+          
             console.log(res.data);
 
             navigate("/products");
 
             localStorage.removeItem("token");
-            localStorage.setItem("token", JSON.stringify(res.data[0]));
+            localStorage.setItem("token", JSON.stringify(res.data.token));
             setNotIsLogin(false);
-            setUserApp(res.data[0]);
+            setUserApp(res.data);
             // setUserName(values);
             // userSetItem(values);
             successMsg("Sucessful login");
-          } else {
-            console.log("User not found- ", res.data);
-            errorMsg("User not found");
-          }
+          
         })
         .catch((err) => {
-          console.log(err);
-          errorMsg(err);
+          console.log("User not found- ");
+          errorMsg("User not found");
+          // console.log(err);
+          // errorMsg(err);
         });
     },
   });
