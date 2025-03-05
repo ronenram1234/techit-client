@@ -1,0 +1,16 @@
+{
+  "folders": [
+	{
+		"path": "../../.."
+	},
+	{
+		"path": "../../../../../udemy/The Ultimate React Course 2024"
+	},
+	{
+		"path": "../../../../../tomer/twilio-hume"
+	}
+],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "HackerU_react"
+  }
+}
