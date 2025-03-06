@@ -19,7 +19,7 @@ const Cart: FunctionComponent = () => {
     };
 
     fetchCart();
-    console.log(cart);
+
   }, []);
 
   return (

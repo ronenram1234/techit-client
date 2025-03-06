@@ -60,7 +60,7 @@ const UpdateAdd: FunctionComponent<UpdateAddProps> = ({
             handleModalUpdate();
           })
           .catch((err) => {
-            console.log(err);
+
             errorMsg(err);
           });
       } else {
@@ -76,7 +76,7 @@ const UpdateAdd: FunctionComponent<UpdateAddProps> = ({
             handleModalUpdate();
           })
           .catch((err) => {
-            console.log(err);
+
             errorMsg(err);
           });
       }

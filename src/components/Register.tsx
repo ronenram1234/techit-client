@@ -48,7 +48,7 @@ const Register: FunctionComponent<RegisterProps> = ({ setNotIsLogin }) => {
               navigate("/");
             })
             .catch((err) => {
-              console.log(err);
+
               errorMsg(err.response.data);
             });
         // });

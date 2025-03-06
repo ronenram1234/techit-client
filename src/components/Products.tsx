@@ -47,17 +47,13 @@ const Products: FunctionComponent<ProductsProps> = ({
         setAllProducts(res.data);
         // console.log(res.data);
       } catch (err) {
-        console.log(err);
+
       }
     };
     fetchP();
   }, [isProductChange]);
 
-  // useEffect(() => {
-  //   if (shouldCartUpdate === true) {
-  //     setShouldCartUpdate(false);
-  //   }
-  // }, [shouldCartUpdate]);
+  
 
   function addCart(product: Product) {
     // const myCart:Product[] = [];
@@ -67,32 +63,9 @@ const Products: FunctionComponent<ProductsProps> = ({
       userApp._id &&
       addProductIdToCart(product._id)
         .then((res) => {
-          // let promises = [];
-          // for (let key of res.data.products) {
-          //   promises.push(getProductById(key));
-          // }
-          // Promise.all(promises)
-          //   .then((res) => {
-          //     console.log(res);
-
-          // res.data.products.map((item: Product) => tempCart.push(item));
-          // console.log(tempCart);
-          // setCart(res.data.products);
-          // })
-          // .catch((err) => console.log(err));
+         
         })
-        //       tempCart.push(res.data[0]);
-
-        // res.data.products.map((key: string) => {
-        //   getProductById(key)
-        //     .then((res) => {
-        //       tempCart.push(res.data[0]);
-
-        //       setCart(tempCart);
-        //       // setShouldCartUpdate(true)
-        //     })
-        //     .catch((err) => console.log(err));
-        // });
+       
 
         .catch((err) => console.log(err));
   }

@@ -29,7 +29,7 @@ const Login: FunctionComponent<LoginProps> = ({
       checkUser(values)
         .then((res) => {
           
-            console.log(res.data);
+
 
             navigate("/products");
 
@@ -43,7 +43,7 @@ const Login: FunctionComponent<LoginProps> = ({
           
         })
         .catch((err) => {
-          console.log("User not found- ");
+
           errorMsg("User not found");
           // console.log(err);
           // errorMsg(err);

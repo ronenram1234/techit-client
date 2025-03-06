@@ -17,10 +17,10 @@ const Profile: FunctionComponent<ProfileProps> = ({
   let user: User | null = null;
 
   if (userString !== null) {
-    console.log(userString);
+
     // user = JSON.parse(userString);
     user = userApp;
-    console.log(user);
+
     // console.log(user[0].name);
   } else {
     errorMsg("Critical error - please login again");
